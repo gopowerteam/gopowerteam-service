@@ -14,5 +14,12 @@ export function setupSwagger(app: NestApplication) {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/api', app, document);
+
+  SwaggerModule.setup('/docs', app, document);
+
+  const adapter = app.getHttpAdapter();
+  // 设置OPENAPI接口地址
+  adapter.get('/api-docs', function (req, res) {
+    res.send(JSON.stringify(document));
+  });
 }
