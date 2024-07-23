@@ -1,0 +1,14 @@
+{
+  "upgrade": true,
+  "color":true,
+  "install": "prompt",
+  "packageManager":"pnpm",
+  "format": [
+    "group"
+  ],
+  "reject": [
+    "cache-manager",
+    "cache-manager-redis-store",
+    "nanoid"
+  ]
+}

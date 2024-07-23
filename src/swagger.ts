@@ -15,11 +15,11 @@ export function setupSwagger(app: NestApplication) {
 
   const document = SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('/docs', app, document);
+  SwaggerModule.setup('/swagger', app, document);
 
   const adapter = app.getHttpAdapter();
   // 设置OPENAPI接口地址
-  adapter.get('/api-docs', function (req, res) {
+  adapter.get('/swagger/api-docs', function (req, res) {
     res.send(JSON.stringify(document));
   });
 }
