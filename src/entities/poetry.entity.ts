@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { pipe } from 'ramda';
 import { EntityClass, EntityWithTime } from 'src/shared/typeorm/entity';
 import { ApiProperty } from '@nestjs/swagger';
@@ -8,7 +8,7 @@ export class Poetry extends pipe(EntityWithTime)(EntityClass) {
   @ApiProperty({
     description: 'ID',
   })
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @ApiProperty({
@@ -18,13 +18,13 @@ export class Poetry extends pipe(EntityWithTime)(EntityClass) {
   author: string;
 
   @ApiProperty({
-    description: '类型',
+    description: '朝代',
   })
   @Column()
-  type: string;
+  dynasty: string;
 
   @ApiProperty({
-    description: '题目',
+    description: '标题',
   })
   @Column()
   title: string;
@@ -33,10 +33,10 @@ export class Poetry extends pipe(EntityWithTime)(EntityClass) {
     description: '内容',
   })
   @Column()
-  contents: string;
+  content: string;
 
   @ApiProperty({
-    description: '内容',
+    description: '标签',
   })
   @Column({ type: 'text', array: true, default: [] })
   tags: string[];

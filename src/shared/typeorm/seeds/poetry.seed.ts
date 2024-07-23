@@ -2,7 +2,6 @@ import { Seeder } from 'typeorm-extension';
 import { DataSource } from 'typeorm';
 import { Poetry } from 'src/entities/poetry.entity';
 import * as poetryJSON from 'src/resource/poetry.json';
-import { plainToInstance } from 'class-transformer';
 
 export default class PoetrySeeder implements Seeder {
   public async run(dataSource: DataSource): Promise<void> {
@@ -12,16 +11,17 @@ export default class PoetrySeeder implements Seeder {
     const poetryRepository = dataSource.getRepository(Poetry);
 
     if (poetryJSON) {
-      const data = plainToInstance(Poetry, poetryJSON, {
-        enableImplicitConversion: true,
-      });
+      const data = poetryJSON;
 
       await poetryRepository.save(
-        data.map((item) =>
-          Object.assign(item, {
-            tags: ['唐诗', '唐诗三百首'],
-          }),
-        ),
+        data.map((item) => ({
+          id: item.id,
+          author: item.author,
+          dynasty: '唐',
+          title: item.title,
+          content: item.contents,
+          tags: ['唐诗三百首'],
+        })),
       );
     }
   }
