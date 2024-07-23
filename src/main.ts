@@ -6,7 +6,8 @@ import { setupSwagger } from './swagger';
 //
 async function bootstrap() {
   const app = await NestFactory.create<NestApplication>(AppModule);
-
+  // 启用CROS
+  app.enableCors();
   // 配置Swagger
   setupSwagger(app);
 
