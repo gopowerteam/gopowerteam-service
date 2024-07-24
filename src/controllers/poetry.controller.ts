@@ -67,7 +67,7 @@ export class PoetryController {
 
     const host = "https://dds.dui.ai/runtime/v1/synthesize"
     const params = queryString.stringify({
-      text: poetry.content,
+      text: `${poetry.title} ${poetry.dynasty} ${poetry.author} ${poetry.content}`,
       voiceId: "kaolam_diantai",
       audioType: "mp3",
       volume: 50,
