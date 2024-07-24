@@ -7,7 +7,7 @@ import * as queryString from 'querystring'
 import * as dayjs from 'dayjs';
 import * as dayOfYear from 'dayjs/plugin/dayOfYear';
 import { PoetryService } from 'src/services/poetry.service';
-import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 import { IdInput } from 'src/shared/typeorm/dto/id.input'
 import { HttpService } from '@nestjs/axios';
 import { createWriteStream } from 'node:fs';
@@ -52,7 +52,8 @@ export class PoetryController {
     return this.poetryService.findOneById(id);
   }
 
-  // @UseInterceptors(CacheInterceptor)
+  @UseInterceptors(CacheInterceptor)
+  @CacheTTL(3600)
   @Get('speak/:id')
   @ApiOperation({ operationId: 'speak', summary: '根据ID生成语音' })
   @ApiOkResponse()
