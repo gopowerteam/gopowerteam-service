@@ -6,9 +6,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Poetry } from './entities/poetry.entity';
 import { PoetryService } from './services/poetry.service';
 import { CoreModule } from './core/core.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [CoreModule, TypeOrmModule.forFeature([Poetry])],
+  imports: [CoreModule, HttpModule, TypeOrmModule.forFeature([Poetry])],
   controllers: [AppController, PoetryController],
   providers: [AppService, PoetryService],
 })
